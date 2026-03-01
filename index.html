@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navegador de crisis - Gestión Gastronómica</title>
+    <meta property="og:title" content="Navegador de crisis">
+    <meta property="og:description" content="Navega crisis reales en el sector gastronómico y pon a prueba tu comprensión de entornos VUCA">
+    <meta property="og:type" content="website">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f766e 100%);
+            color: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .app-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+        }
+
+        .header {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            padding: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: rgba(30, 41, 59, 0.6);
+            border-right: 1px solid rgba(148, 163, 184, 0.1);
+            padding: 24px 0;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .sidebar h2 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #64748b;
+            padding: 0 20px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .case-list {
+            list-style: none;
+        }
+
+        .case-item {
+            padding: 12px 16px;
+            margin: 0 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            font-size: 14px;
+            color: #cbd5e1;
+        }
+
+        .case-item:hover {
+            background: rgba(148, 163, 184, 0.1);
+            border-left-color: #06b6d4;
+        }
+
+        .case-item.active {
+            background: rgba(6, 182, 212, 0.1);
+            border-left-color: #06b6d4;
+            color: #06b6d4;
+            font-weight: 600;
+        }
+
+        .quiz-item {
+            background: rgba(168, 85, 247, 0.1);
+            border-left-color: #a855f7;
+            margin-top: 8px;
+        }
+
+        .quiz-item:hover {
+            background: rgba(168, 85, 247, 0.15);
+            border-left-color: #a855f7;
+        }
+
+        .quiz-item.active {
+            background: rgba(168, 85, 247, 0.2);
+            border-left-color: #a855f7;
+            color: #d8b4fe;
+        }
+
+        .content-area {
+            flex: 1;
+            padding: 32px;
+            overflow-y: auto;
+        }
+
+        .content-max {
+            max-width: 900px;
+        }
+
+        .case-view {
+            display: none;
+            animation: slideIn 0.4s ease;
+        }
+
+        .case-view.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .case-title {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .case-icon {
+            font-size: 40px;
+        }
+
+        .case-title-text h2 {
+            font-size: 28px;
+            margin-bottom: 4px;
+            color: #f1f5f9;
+        }
+
+        .case-title-text p {
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
+        .vuca-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .vuca-tag {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-volatility {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .tag-uncertainty {
+            background: rgba(251, 146, 60, 0.2);
+            color: #fdba74;
+            border: 1px solid rgba(251, 146, 60, 0.3);
+        }
+
+        .tag-complexity {
+            background: rgba(168, 85, 247, 0.2);
+            color: #d8b4fe;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .tag-ambiguity {
+            background: rgba(34, 197, 94, 0.2);
+            color: #86efac;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #06b6d4;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-icon {
+            font-size: 20px;
+        }
+
+        .section-content {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            line-height: 1.7;
+            color: #cbd5e1;
+        }
+
+        .section-content p {
+            margin-bottom: 12px;
+        }
+
+        .section-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .challenge-box {
+            background: rgba(239, 68, 68, 0.05);
+            border-left: 4px solid #ef4444;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .challenge-box strong {
+            color: #fca5a5;
+        }
+
+        .decision-box {
+            background: rgba(6, 182, 212, 0.05);
+            border-left: 4px solid #06b6d4;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .decision-box strong {
+            color: #06b6d4;
+        }
+
+        .success-box {
+            background: rgba(34, 197, 94, 0.05);
+            border-left: 4px solid #22c55e;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+
+        .success-box strong {
+            color: #86efac;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .skill-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 10px;
+            padding: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            border-color: rgba(6, 182, 212, 0.3);
+            background: rgba(30, 41, 59, 1);
+        }
+
+        .skill-card strong {
+            color: #06b6d4;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .skill-card p {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .quiz-question {
+            font-size: 18px;
+            color: #f1f5f9;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quiz-option {
+            background: rgba(30, 41, 59, 0.8);
+            border: 2px solid rgba(148, 163, 184, 0.2);
+            padding: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quiz-option:hover:not(.disabled) {
+            border-color: #06b6d4;
+            background: rgba(6, 182, 212, 0.1);
+        }
+
+        .quiz-option input[type="radio"] {
+            margin-right: 12px;
+        }
+
+        .quiz-option label {
+            cursor: pointer;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .quiz-option.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .quiz-option.correct {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: #22c55e;
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+        }
+
+        .quiz-feedback {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 10px;
+            display: none;
+            line-height: 1.6;
+        }
+
+        .quiz-feedback.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        .quiz-feedback.correct {
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 4px solid #22c55e;
+            color: #86efac;
+        }
+
+        .quiz-feedback.incorrect {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            color: #fca5a5;
+        }
+
+        .quiz-btn {
+            background: #06b6d4;
+            color: #0f172a;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 16px;
+            display: none;
+        }
+
+        .quiz-btn.show {
+            display: inline-block;
+        }
+
+        .quiz-btn:hover {
+            background: #0891b2;
+            transform: translateY(-2px);
+        }
+
+        .results-container {
+            background: rgba(168, 85, 247, 0.1);
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .results-score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #d8b4fe;
+            margin: 20px 0;
+        }
+
+        .results-message {
+            font-size: 16px;
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .reset-btn {
+            background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+                max-height: 160px;
+                display: flex;
+                gap: 16px;
+                overflow-x: auto;
+                padding: 16px;
+            }
+
+            .sidebar h2 {
+                display: none;
+            }
+
+            .case-list {
+                display: flex;
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+
+            .case-item {
+                margin: 0;
+                white-space: nowrap;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .content-area {
+                padding: 20px;
+            }
+
+            .case-title h2 {
+                font-size: 22px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-wrapper">
+        <div class="header">
+            <div class="header-content">
+                <h1>🌊 Navegador de crisis</h1>
+                <p>Navega crisis reales en el sector gastronómico | Volatility • Uncertainty • Complexity • Ambiguity</p>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="sidebar scrollbar-hide">
+                <h2>Casos de Estudio</h2>
+                <ul class="case-list">
+                    <li class="case-item active" data-case="1">💰 Cambio de Mercado</li>
+                    <li class="case-item" data-case="2">📱 Transformación Digital</li>
+                    <li class="case-item" data-case="3">⚡ Crisis de Suministros</li>
+                    <li class="case-item" data-case="4">👥 Gestión de Personal</li>
+                    <li class="case-item quiz-item" data-case="quiz">🎯 Evaluación Final</li>
+                </ul>
+            </div>
+
+            <div class="content-area scrollbar-hide">
+                <!-- Case 1: Volatilidad -->
+                <div class="case-view active" data-case="1">
+                    <div class="content-max">
+                        <div class="case-title">
+                            <div class="case-icon">💰</div>
+                            <div class="case-title-text">
+                                <h2>Cambio de Mercado</h2>
+                                <p>Cuando el modelo de negocio se vuelve obsoleto</p>
+                            </div>
+                        </div>
+
+                        <div class="vuca-tags">
+                            <span class="vuca-tag tag-volatility">Volatilidad</span>
+                            <span class="vuca-tag tag-uncertainty">Incertidumbre</span>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title"><span class="section-icon">⚡</span> La Situación</h3>
+                            <div class="section-content">
+                                <p>Post-pandemia: restaurante tradicional con 200 m² centrado en comensales locales. Cambios en comportamiento: trabajo remoto, comidas más casuales, delivery y ghost kitchens emergentes. Tus ingresos cayeron 40% en 18 meses, competencia digital crecía.</p>
+                                <div class="challenge-box">
+                                    <strong>El Desafío:</strong> Transformar modelo de negocio sin capital significativo y con incertidumbre sobre dirección correcta.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title"><span class="section-icon">🎯</span> Decisiones Clave</h3>
+                            <div class="section-content">
+                                <div class="decision-box">
+                                    <strong>Decisión 1 - Experimentos Rápidos:</strong> En lugar de planificar perfectamente, lanzaste 3 iniciativas piloto: delivery, menú ejecutivo (precio accesible), eventos corporativos. Medías resultados semanales.
+                                </div>
+                                <div class="decision-box">
+                                    <strong>Decisión 2 - Diversificación Modular:</strong> Reconvertiste 40% del espacio en zona de "coworking gastronómico" con wifi + comida. Ingreso pasivo + visibilidad nueva.
+                                </div>
+                                <div class="decision-box">
+                                    <strong>Decisión 3 - Alianzas Estratégicas:</strong> Asociación con plataforma local de delivery con términos favorables, no como commoditized player sino como socio diferenciado.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title"><span class="section-icon">✅</span> Resultados</h3>
+                            <div class="section-content">
+                                <div class="success-box">
+                                    <strong>Recuperación de ingresos:</strong> De -40% a +15% en 12 meses.
+                                </div>
+                                <div class="success-box">
+                                    <strong>Diversificación de revenue:</strong> 3 canales operativos (presencial, delivery, eventos), reduciendo riesgo.
+                                </div>
+                                <div class="success-box">
+                                    <strong>Aprendizaje organizacional:</strong> El equipo internalizó mentalidad de experimentación y adaptación ágil.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title"><span class="section-icon">🧠</span> Habilidades Aplicadas</h3>
+                            <div class="skills-grid">
+                                <div class="skill-card">
+                                    <strong>Pensamiento Disruptivo</strong>
+                                    <p>Cuestionar supuestos del modelo tradicional</p>
+                                </div>
+                                <div class="skill-card">
+                                    <strong>Metodología Ágil</strong>
+                                    <p>Iterar rápido, aprender de fallos, pivotar</p>
+                                </div>
+                                <div class="skill-card">
+                                    <strong>Visión de Ecosistema</strong>
+                                    <p>Entender tendencias del mercado más allá del restaurante</p>
+                                </div>
+                                <div class="skill-card">
+                                    <strong>Gestión de Incertidumbre</strong>
+                                    <p>Tomar decisiones con información incompleta</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 2: Complejidad -->
+                <div class="case-view" data-case="2">
+                    <div class="content-max">
+                        <div class="case-title">
+                            <div class="case-icon">📱</div>
+                            <div class="case-title-text">
+                                <h2>Transformación Digital</h2>
+                                <p>Cuando la tecnología es solución y complicación</p>
+                            </div>
+                        </div>
+
+                        <div class="vuca-tags">
+                            <span class="vuca-tag tag-complexity">Complejidad</span>
+                            <span class="vuca-tag tag-ambiguity">Ambigüedad</span>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title"><span class="section-icon">⚡</span> La Situación</h3>
+                            <div class="section-content">
+                                <p>Decidiste implementar sistema POS integrado, app de clientes, gestión automatizada de inventario y análisis de datos. 6 meses después: sistema no integraba, staff no adoptaba, datos inconsistentes, inversión $40K sin ROI visible.</p>
+                                <div class="challenge-box">
+                                    <strong>El Desafío:</strong> Recuperar valor de inversión sin paralizar operaciones, mientras resuelves resistencia organizacional.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title"><span class="section-icon">🎯</span> Decisiones Clave</h3>
+                            <div class="section-content">
+                                <div class="decision-box">
+                                    <strong>Decisión 1 - Pausar y Diagnosticar:</strong> En lugar de presionar adopción, pausaste rollout completo y diagnosticaste blockers: complejidad técnica, falta de cambio cultural, pain points mal entendidos.
+                                </div>
+                                <div class="decision-box">
+                                    <strong>Decisión 2 - Adopción Centrada en Personas:</strong> Identificaste "power users" en cada área. Ellos entrenaban a compañeros. Simplificaste interfaces mostrando solo lo esencial por rol.
+                                </div>
+                                <div class="decision-box">
+                                    <strong>Decisión 3 - Medir Valor Tangible:</strong> Conectaste métricas del sistema a beneficios concretos: "Inventario automático = 8 horas ahorradas/semana, = $X ahorro mensual".
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title"><span class="section-icon">✅</span> Resultados</h3>
+                            <div class="section-content">
+                                <div class="success-box">
+                                    <strong>Adopción del 95%:</strong> De 20% a 95% de staff usando sistema regularmente.
+                                </div>
+                                <div class="success-box">
+                                    <strong>ROI alcanzado:</strong> Reducciones en desperdicio, horas operativas y errores justificaron inversión en 8 meses.
+                                </div>
+                                <div class="success-box">
+                                    <strong>Insight estratégico:</strong> Datos reales permitieron decisiones sobre menú, precios, staff scheduling basadas en evidencia.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title"><span class="section-icon">🧠</span> Habilidades Aplicadas</h3>
+                            <div class="skills-grid">
+                                <div class="skill-card">
+                                    <strong>Gestión del Cambio</strong>
+                                    <p>Comprender resistencia, acompañar transición</p>
+                                </div>
+                                <div class="skill-card">
+                                    <strong>Alfabetización Digital</strong>
+                                    <p>No ser experto técnico, pero entender conceptos y valor</p>
+                                </div>
+                                <div class="skill-card">
+                                    <strong>Liderazgo Distribuido</strong>
+                                    <p>Capacitar power users para liderar adopción</p>
+                                </div>
+                                <div class="skill-card">
+                                    <strong>Pensamiento Cuantitativo</strong>
+                                    <p>Medir y comunicar valor en términos numéricos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 3: Incertidumbre -->
+                <div class="case-view" data-case="3">
+                    <div class="content-max">
+                        <div class="case-title">
+                            <div class="case-icon">⚡</div>
+                            <div class="case-title-text">
+                                <h2>Crisis de Suministros</h2>
+                                <p>Cuando la cadena se rompe sin previo aviso</p>
+                            </div>
+                        </div>
+
+                        <div class="vuca-tags">
+                            <span class="vuca-tag tag-uncertainty">Incertidumbre</span>
+                            <span class="vuca-tag tag-volatility">Volatilidad</span>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title"><span class="section-icon">⚡</span> La Situación</h3>
+                            <div class="section-content">
+                                <p>Tu proveedor principal de proteínas importadas cerró operaciones sin aviso. Representaba 60% de tu menú. Proveedores alternativos con precios 40% más altos o calidad inconsistente. Clientes esperan tus platos signature. Tienes inventario para 4 días.</p>
+                                <div class="challenge-box">
+                                    <strong>El Desafío:</strong> Mantener operaciones sin sacrificar calidad ni quebrar márgenes, en contexto de información limitada sobre duración de la crisis.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title"><span class="section-icon">🎯</span> Decisiones Clave</h3>
+                            <div class="section-content">
+                                <div class="decision-box">
+                                    <strong>Decisión 1 - Menú Adaptativo:</strong> Creaste "menú temporal" con platos que aprovechan ingredientes locales disponibles. Comunicaste transparentemente a clientes la situación como "temporada de ingredientes locales".
+                                </div>
+                                <div class="decision-box">
+                                    <strong>Decisión 2 - Diversificación de Proveedores:</strong> Estableciste relaciones con 4 proveedores pequeños en vez de depender de uno grande. Mayor complejidad operativa pero resiliencia.
+                                </div>
+                                <div class="decision-box">
+                                    <strong>Decisión 3 - Buffer Estratégico:</strong> Implementaste política de mantener 15% de inventario crítico congelado como "seguro" contra shocks futuros.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title"><span class="section-icon">✅</span> Resultados</h3>
+                            <div class="section-content">
+                                <div class="success-box">
+                                    <strong>Continuidad operativa:</strong> Mantuviste el restaurante abierto durante toda la crisis.
+                                </div>
+                                <div class="success-box">
+                                    <strong>Reputación fortalecida:</strong> Clientes valoraron la transparencia y la creatividad culinaria con ingredientes locales.
+                                </div>
+                                <div class="success-box">
+                                    <strong>Sistema resiliente:</strong> Red de proveedores diversificada reduce dependencia y riesgo futuro.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title"><span class="section-icon">🧠</span> Habilidades Aplicadas</h3>
+                            <div class="skills-grid">
+                                <div class="skill-card">
+                                    <strong>Gestión de Crisis</strong>
+                                    <p>Responder rápido bajo presión sin pánico</p>
+                                </div>
+                                <div class="skill-card">
+                                    <strong>Comunicación Transparente</strong>
+                                    <p>Convertir problema en oportunidad narrativa</p>
+                                </div>
+                                <div class="skill-card">
+                                    <strong>Pensamiento de Resiliencia</strong>
+                                    <p>Diseñar sistemas anti-frágiles</p>
+                                </div>
+                                <div class="skill-card">
+                                    <strong>Creatividad Adaptativa</strong>
+                                    <p>Innovar con restricciones como motor creativo</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 4: Ambigüedad -->
+                <div class="case-view" data-case="4">
+                    <div class="content-max">
+                        <div class="case-title">
+                            <div class="case-icon">👥</div>
+                            <div class="case-title-text">
+                                <h2>Gestión de Personal</h2>
+                                <p>Cuando las expectativas no están claras</p>
+                            </div>
+                        </div>
+
+                        <div class="vuca-tags">
+                            <span class="vuca-tag tag-ambiguity">Ambigüedad</span>
+                            <span class="vuca-tag tag-complexity">Complejidad</span>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title"><span class="section-icon">⚡</span> La Situación</h3>
+                            <div class="section-content">
+                                <p>Rotación de personal del 80% anual. Cada empleado interpreta "buen servicio" diferente. No hay estándares claros. Gerentes dan instrucciones contradictorias. Clientes reciben experiencias inconsistentes. Equipo frustrado, no sabe qué se espera de ellos.</p>
+                                <div class="challenge-box">
+                                    <strong>El Desafío:</strong> Crear claridad y alineación en cultura organizacional sin documentación previa ni estándares definidos.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title"><span class="section-icon">🎯</span> Decisiones Clave</h3>
+                            <div class="section-content">
+                                <div class="decision-box">
+                                    <strong>Decisión 1 - Co-Creación de Estándares:</strong> Talleres con todo el equipo para definir juntos qué significa "excelencia" en cada rol. No impuesto desde arriba, sino construido colaborativamente.
+                                </div>
+                                <div class="decision-box">
+                                    <strong>Decisión 2 - Manual Visual Operativo:</strong> Documentaste procesos con fotos, videos cortos, checklists visuales. Eliminaste ambigüedad sobre "cómo hacer las cosas aquí".
+                                </div>
+                                <div class="decision-box">
+                                    <strong>Decisión 3 - Feedback Estructurado:</strong> Sistema semanal de retroalimentación 1-1 con cada empleado. Expectativas claras, reconocimiento específico, corrección constructiva.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title"><span class="section-icon">✅</span> Resultados</h3>
+                            <div class="section-content">
+                                <div class="success-box">
+                                    <strong>Rotación reducida:</strong> De 80% a 35% anual en 18 meses.
+                                </div>
+                                <div class="success-box">
+                                    <strong>Consistencia operativa:</strong> Experiencia del cliente homogénea independiente de quién atiende.
+                                </div>
+                                <div class="success-box">
+                                    <strong>Cultura de aprendizaje:</strong> Equipo se siente empoderado y tiene claridad sobre crecimiento profesional.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="section-title"><span class="section-icon">🧠</span> Habilidades Aplicadas</h3>
+                            <div class="skills-grid">
+                                <div class="skill-card">
+                                    <strong>Clarificación Estratégica</strong>
+                                    <p>Convertir ambigüedad en estructura clara</p>
+                                </div>
+                                <div class="skill-card">
+                                    <strong>Facilitación Participativa</strong>
+                                    <p>Co-crear soluciones con el equipo</p>
+                                </div>
+                                <div class="skill-card">
+                                    <strong>Documentación Efectiva</strong>
+                                    <p>Capturar conocimiento de forma accesible</p>
+                                </div>
+                                <div class="skill-card">
+                                    <strong>Coaching Operacional</strong>
+                                    <p>Desarrollar personas mediante feedback constante</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Section -->
+                <div class="case-view" data-case="quiz">
+                    <div class="content-max">
+                        <div class="case-title">
+                            <div class="case-icon">🎯</div>
+                            <div class="case-title-text">
+                                <h2>Evaluación Final</h2>
+                                <p>Pon a prueba tu comprensión de entornos VUCA</p>
+                            </div>
+                        </div>
+
+                        <div id="quiz-content"></div>
+
+                        <div id="quiz-results" style="display: none;">
+                            <div class="results-container">
+                                <h2 style="color: #d8b4fe; margin-bottom: 16px;">🎓 Evaluación Completada</h2>
+                                <div class="results-score" id="final-score"></div>
+                                <div class="results-message" id="final-message"></div>
+                                <button class="reset-btn" onclick="resetQuiz()">Reintentar Evaluación</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const quizQuestions = [
+            {
+                id: 1,
+                question: "En el caso 'Cambio de Mercado', ¿qué tipo de crisis VUCA es predominante y por qué la estrategia de 'experimentos rápidos' fue efectiva?",
+                options: [
+                    "Complejidad - porque había muchas variables que analizar antes de actuar",
+                    "Volatilidad - porque el mercado cambiaba rápidamente y era mejor iterar que planificar perfectamente",
+                    "Ambigüedad - porque no se entendía la causa del problema",
+                    "Incertidumbre - porque no había información disponible sobre tendencias"
+                ],
+                correct: 1,
+                feedback: "La Volatilidad se caracteriza por cambios rápidos en el entorno. La estrategia de experimentos rápidos (metodología ágil) es ideal porque permite adaptarse a la velocidad del cambio del mercado sin necesidad de planes perfectos que quedarían obsoletos rápidamente."
+            },
+            {
+                id: 2,
+                question: "En 'Transformación Digital', ¿por qué la decisión de 'pausar y diagnosticar' fue más valiosa que presionar la adopción del sistema?",
+                options: [
+                    "Porque la complejidad requiere entender la interconexión de factores (técnicos, culturales, operativos) antes de forzar una solución",
+                    "Porque era necesario esperar a que el mercado se estabilizara",
+                    "Porque el sistema era demasiado costoso para implementarlo rápido",
+                    "Porque el personal necesitaba más motivación emocional"
+                ],
+                correct: 0,
+                feedback: "La Complejidad organizacional surge de múltiples factores interconectados. Pausar permitió diagnosticar los blockers reales (técnicos Y culturales), en lugar de asumir que solo era 'resistencia al cambio'. Esta comprensión sistémica llevó a soluciones más efectivas."
+            },
+            {
+                id: 3,
+                question: "En 'Crisis de Suministros', ¿qué principio de gestión de Incertidumbre se aplicó con el 'menú adaptativo' y la comunicación transparente?",
+                options: [
+                    "Reducir la incertidumbre mediante información y flexibilidad adaptativa",
+                    "Eliminar completamente la incertidumbre con planificación perfecta",
+                    "Ignorar la incertidumbre y mantener el menú original a cualquier costo",
+                    "Transferir la incertidumbre a los proveedores mediante contratos rígidos"
+                ],
+                correct: 0,
+                feedback: "En contextos de Incertidumbre, no se puede eliminar la falta de información, pero sí se puede reducir su impacto mediante: (1) comunicación transparente que genera confianza, y (2) sistemas adaptativos que funcionan bajo múltiples escenarios posibles."
+            },
+            {
+                id: 4,
+                question: "En 'Gestión de Personal', ¿qué antídoto VUCA se aplicó al co-crear estándares con el equipo en lugar de imponerlos?",
+                options: [
+                    "Agilidad - para responder rápido a cambios",
+                    "Visión - para mantener el propósito claro",
+                    "Claridad - para eliminar ambigüedad mediante definición participativa",
+                    "Entendimiento - para analizar causas profundas"
+                ],
+                correct: 2,
+                feedback: "La Ambigüedad se combate con Claridad. Al co-crear estándares con el equipo (en lugar de imponerlos), se eliminó la ambigüedad sobre expectativas Y se generó apropiación, porque el equipo participó en definir 'qué significa excelencia aquí'."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        // Navigation
+        const caseItems = document.querySelectorAll('.case-item');
+        const caseViews = document.querySelectorAll('.case-view');
+
+        caseItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const caseId = item.dataset.case;
+                
+                caseItems.forEach(i => i.classList.remove('active'));
+                caseViews.forEach(v => v.classList.remove('active'));
+                
+                item.classList.add('active');
+                document.querySelector(`.case-view[data-case="${caseId}"]`).classList.add('active');
+                
+                document.querySelector('.content-area').scrollTop = 0;
+
+                if (caseId === 'quiz') {
+                    loadQuiz();
+                }
+            });
+        });
+
+        function loadQuiz() {
+            const quizContent = document.getElementById('quiz-content');
+            const question = quizQuestions[currentQuestionIndex];
+
+            quizContent.innerHTML = `
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <strong>Pregunta ${currentQuestionIndex + 1} de ${quizQuestions.length}</strong><br><br>
+                        ${question.question}
+                    </div>
+                    <div class="quiz-options" id="options-${question.id}">
+                        ${question.options.map((option, index) => `
+                            <div class="quiz-option" id="option-${question.id}-${index}">
+                                <input type="radio" 
+                                       id="q${question.id}-${index}" 
+                                       name="question-${question.id}" 
+                                       value="${index}"
+                                       onchange="selectAnswer(${question.id}, ${index})">
+                                <label for="q${question.id}-${index}">${String.fromCharCode(65 + index)}) ${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button class="quiz-btn" id="submit-${question.id}" onclick="submitAnswer(${question.id})">
+                        Verificar Respuesta
+                    </button>
+                    <div class="quiz-feedback" id="feedback-${question.id}"></div>
+                </div>
+            `;
+
+            answered = false;
+        }
+
+        function selectAnswer(questionId, optionIndex) {
+            document.getElementById(`submit-${questionId}`).classList.add('show');
+        }
+
+        function submitAnswer(questionId) {
+            if (answered) return;
+            answered = true;
+
+            const question = quizQuestions[currentQuestionIndex];
+            const selectedOption = document.querySelector(`input[name="question-${questionId}"]:checked`);
+            
+            if (!selectedOption) {
+                alert('Por favor selecciona una respuesta');
+                answered = false;
+                return;
+            }
+
+            const selectedIndex = parseInt(selectedOption.value);
+            const isCorrect = selectedIndex === question.correct;
+
+            // Disable all options
+            const options = document.querySelectorAll(`#options-${questionId} .quiz-option`);
+            options.forEach((opt, index) => {
+                opt.classList.add('disabled');
+                const radio = opt.querySelector('input');
+                if (radio) radio.disabled = true;
+
+                if (index === question.correct) {
+                    opt.classList.add('correct');
+                } else if (index === selectedIndex && !isCorrect) {
+                    opt.classList.add('incorrect');
+                }
+            });
+
+            // Show feedback
+            const feedback = document.getElementById(`feedback-${questionId}`);
+            feedback.classList.add('show');
+            feedback.classList.add(isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = `
+                <strong>${isCorrect ? '✓ ¡Correcto!' : '✗ Incorrecto - La respuesta correcta es ' + String.fromCharCode(65 + question.correct)}</strong><br><br>
+                ${question.feedback}
+            `;
+
+            if (isCorrect) score++;
+
+            // Hide submit button and show next/finish button
+            document.getElementById(`submit-${questionId}`).style.display = 'none';
+            
+            if (currentQuestionIndex < quizQuestions.length - 1) {
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'quiz-btn show';
+                nextBtn.textContent = 'Siguiente Pregunta →';
+                nextBtn.onclick = nextQuestion;
+                feedback.parentElement.appendChild(nextBtn);
+            } else {
+                const finishBtn = document.createElement('button');
+                finishBtn.className = 'quiz-btn show';
+                finishBtn.textContent = 'Ver Resultados Finales →';
+                finishBtn.onclick = showResults;
+                feedback.parentElement.appendChild(finishBtn);
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            loadQuiz();
+            document.querySelector('.content-area').scrollTop = 0;
+        }
+
+        function showResults() {
+            document.getElementById('quiz-content').style.display = 'none';
+            document.getElementById('quiz-results').style.display = 'block';
+
+            const percentage = (score / quizQuestions.length) * 100;
+            let message = '';
+
+            if (percentage === 100) {
+                message = '🏆 <strong>Dominio excepcional de VUCA!</strong><br><br>Has demostrado una comprensión profunda de cómo identificar tipos de crisis y aplicar estrategias apropiadas. Tu análisis de los casos muestra pensamiento estratégico avanzado.';
+            } else if (percentage >= 75) {
+                message = '🎯 <strong>Muy buen análisis estratégico</strong><br><br>Comprendes los principios fundamentales de gestión en entornos VUCA. Revisa los casos donde la respuesta fue incorrecta para fortalecer tu comprensión.';
+            } else if (percentage >= 50) {
+                message = '📚 <strong>Conocimiento básico adquirido</strong><br><br>Captas las ideas principales. Te recomendamos revisar los 4 casos nuevamente, prestando atención a cómo cada tipo de crisis requiere un enfoque específico.';
+            } else {
+                message = '💪 <strong>Es momento de reforzar conceptos</strong><br><br>Te sugerimos revisar los casos de estudio con más detalle, identificando qué tipo VUCA representa cada uno y por qué las decisiones tomadas fueron efectivas.';
+            }
+
+            document.getElementById('final-score').textContent = `${score}/${quizQuestions.length}`;
+            document.getElementById('final-message').innerHTML = message;
+        }
+
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            answered = false;
+            
+            document.getElementById('quiz-content').style.display = 'block';
+            document.getElementById('quiz-results').style.display = 'none';
+            
+            loadQuiz();
+            document.querySelector('.content-area').scrollTop = 0;
+        }
+    </script>
+</body>
+</html>
