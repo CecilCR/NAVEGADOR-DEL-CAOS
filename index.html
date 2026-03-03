@@ -8,373 +8,271 @@
   <meta property="og:description" content="Contrasta tu hipótesis con crisis reales en empresas de servicios">
   <meta property="og:type" content="website">
   <style>
-   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html, body { height:100%; width:100%; }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height:100%; width:100%; }
 
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f766e 100%);
-  color: #cbd5e1;
-  overflow: hidden;
-  font-size: 14px;
-  line-height: 1.75;
-}
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f766e 100%);
+      color: #cbd5e1;
+      overflow: hidden;
+      font-size: 14px;
+      line-height: 1.75;
+    }
 
-.app-wrapper { width:100%; height:100%; display:flex; flex-direction:column; overflow:auto; }
+    .app-wrapper { width:100%; height:100%; display:flex; flex-direction:column; overflow:auto; }
 
-/* ── HEADER ── */
-.header {
-  background: rgba(15,23,42,0.98);
-  border-bottom: 1px solid rgba(148,163,184,0.1);
-  padding: 18px 24px;
-  backdrop-filter: blur(10px);
-  flex-shrink: 0;
-}
-.header-content { max-width:1200px; margin:0 auto; }
-.header h1 {
-  font-size: 24px;
-  font-weight: 700;
-  color: #f1f5f9;
-  letter-spacing: -0.3px;
-  margin-bottom: 3px;
-}
-.header h1 span {
-  background: linear-gradient(135deg, #06b6d4, #0891b2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.header p { font-size:12px; color:#64748b; letter-spacing: 0.3px; }
+    /* HEADER */
+    .header {
+      background: rgba(15,23,42,0.98);
+      border-bottom: 1px solid rgba(148,163,184,0.1);
+      padding: 18px 24px;
+      backdrop-filter: blur(10px);
+      flex-shrink: 0;
+    }
+    .header-content { max-width:1200px; margin:0 auto; }
+    .header h1 {
+      font-size: 24px; font-weight: 700; color: #f1f5f9;
+      letter-spacing: -0.3px; margin-bottom: 3px;
+    }
+    .header h1 span {
+      background: linear-gradient(135deg, #06b6d4, #0891b2);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header p { font-size:12px; color:#64748b; letter-spacing:0.3px; }
 
-/* ── USAGE BANNER ── */
-.usage-banner {
-  background: rgba(6,182,212,0.05);
-  border-bottom: 1px solid rgba(6,182,212,0.12);
-  padding: 9px 24px;
-  font-size: 12px;
-  color: #64748b;
-  text-align: center;
-  letter-spacing: 0.2px;
-}
-.usage-banner strong { color: #06b6d4; font-weight: 600; }
+    /* USAGE BANNER */
+    .usage-banner {
+      background: rgba(6,182,212,0.05);
+      border-bottom: 1px solid rgba(6,182,212,0.12);
+      padding: 9px 24px; font-size: 12px; color: #64748b;
+      text-align: center; letter-spacing: 0.2px;
+    }
+    .usage-banner strong { color: #06b6d4; font-weight: 600; }
 
-/* ── LAYOUT ── */
-.main-content { flex:1; display:flex; overflow:hidden; }
+    /* LAYOUT */
+    .main-content { flex:1; display:flex; overflow:hidden; }
 
-.sidebar {
-  width: 260px;
-  background: rgba(15,23,42,0.6);
-  border-right: 1px solid rgba(148,163,184,0.08);
-  padding: 20px 0;
-  overflow-y: auto;
-  flex-shrink: 0;
-}
-.sidebar h2 {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #334155;
-  padding: 0 20px;
-  margin-bottom: 12px;
-  font-weight: 600;
-}
-.case-list { list-style:none; }
-.case-item {
-  padding: 10px 16px;
-  margin: 2px 8px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all .2s ease;
-  border-left: 2px solid transparent;
-  font-size: 13px;
-  color: #64748b;
-  font-weight: 500;
-}
-.case-item:hover { background:rgba(148,163,184,0.07); color:#94a3b8; border-left-color:#334155; }
-.case-item.active { background:rgba(6,182,212,0.08); border-left-color:#06b6d4; color:#e2e8f0; font-weight:600; }
-.quiz-item { color:#64748b; }
-.quiz-item.active { background:rgba(168,85,247,0.1); border-left-color:#a855f7; color:#e2e8f0; }
-.quiz-item:hover  { border-left-color:#7c3aed; }
+    .sidebar {
+      width: 260px; background: rgba(15,23,42,0.6);
+      border-right: 1px solid rgba(148,163,184,0.08);
+      padding: 20px 0; overflow-y: auto; flex-shrink: 0;
+    }
+    .sidebar h2 {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 2px;
+      color: #334155; padding: 0 20px; margin-bottom: 12px; font-weight: 600;
+    }
+    .case-list { list-style:none; }
+    .case-item {
+      padding: 10px 16px; margin: 2px 8px; border-radius: 6px; cursor: pointer;
+      transition: all .2s ease; border-left: 2px solid transparent;
+      font-size: 13px; color: #64748b; font-weight: 500;
+    }
+    .case-item:hover { background:rgba(148,163,184,0.07); color:#94a3b8; border-left-color:#334155; }
+    .case-item.active { background:rgba(6,182,212,0.08); border-left-color:#06b6d4; color:#e2e8f0; font-weight:600; }
+    .quiz-item { color:#64748b; }
+    .quiz-item.active { background:rgba(168,85,247,0.1); border-left-color:#a855f7; color:#e2e8f0; }
+    .quiz-item:hover  { border-left-color:#7c3aed; color:#94a3b8; }
 
-/* ── CONTENT ── */
-.content-area { flex:1; padding:32px; overflow-y:auto; }
-.content-max  { max-width:840px; }
+    /* CONTENT */
+    .content-area { flex:1; padding:32px; overflow-y:auto; }
+    .content-max  { max-width:840px; }
 
-.case-view { display:none; animation:fadeIn .3s ease; }
-.case-view.active { display:block; }
+    .case-view { display:none; animation:fadeIn .3s ease; }
+    .case-view.active { display:block; }
 
-@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 
-/* ── CASE HEADER ── */
-.case-title { margin-bottom:24px; }
-.case-title h2 {
-  font-size: 22px;
-  font-weight: 700;
-  color: #f1f5f9;
-  letter-spacing: -0.3px;
-  margin-bottom: 4px;
-}
-.case-title p { font-size:13px; color:#94a3b8; }
+    /* CASE HEADER — BUG 2 CORREGIDO: display:flex en .case-title */
+    .case-title {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 24px;
+    }
+    .case-icon { font-size: 32px; flex-shrink: 0; line-height: 1; }
+    .case-title-text h2 {
+      font-size: 22px; font-weight: 700; color: #f1f5f9;
+      letter-spacing: -0.3px; margin-bottom: 3px;
+    }
+    .case-title-text p { font-size:13px; color:#94a3b8; }
 
-/* ── VUCA TAGS ── */
-.vuca-tags { display:flex; gap:6px; margin-bottom:24px; flex-wrap:wrap; }
-.vuca-tag {
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-.tag-volatility  { background:rgba(239,68,68,0.12);  color:#fca5a5; border:1px solid rgba(239,68,68,0.2); }
-.tag-uncertainty { background:rgba(251,146,60,0.12); color:#fdba74; border:1px solid rgba(251,146,60,0.2); }
-.tag-complexity  { background:rgba(168,85,247,0.12); color:#d8b4fe; border:1px solid rgba(168,85,247,0.2); }
-.tag-ambiguity   { background:rgba(34,197,94,0.12);  color:#86efac; border:1px solid rgba(34,197,94,0.2); }
+    /* VUCA TAGS */
+    .vuca-tags { display:flex; gap:6px; margin-bottom:24px; flex-wrap:wrap; }
+    .vuca-tag {
+      padding: 4px 10px; border-radius: 4px; font-size: 10px;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .tag-volatility  { background:rgba(239,68,68,0.12);  color:#fca5a5; border:1px solid rgba(239,68,68,0.2); }
+    .tag-uncertainty { background:rgba(251,146,60,0.12); color:#fdba74; border:1px solid rgba(251,146,60,0.2); }
+    .tag-complexity  { background:rgba(168,85,247,0.12); color:#d8b4fe; border:1px solid rgba(168,85,247,0.2); }
+    .tag-ambiguity   { background:rgba(34,197,94,0.12);  color:#86efac; border:1px solid rgba(34,197,94,0.2); }
 
-/* ── BANNERS ── */
-.contrast-banner {
-  background: rgba(6,182,212,0.08);
-  border: 1px solid rgba(6,182,212,0.2);
-  border-radius: 8px;
-  padding: 12px 16px;
-  font-size: 13.5px;
-  color: #cbd5e1;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  line-height: 1.6;
-  word-break: break-word;
-  overflow-wrap: break-word;
-}
-.contrast-banner .cb-icon { font-size:15px; flex-shrink:0; margin-top:1px; opacity:.8; }
-.contrast-banner span:last-child { flex:1; min-width:0; }
-.contrast-banner strong { color:#06b6d4; font-weight:600; }
+    /* BANNERS */
+    .contrast-banner {
+      background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.2);
+      border-radius: 8px; padding: 12px 16px; font-size: 13.5px; color: #cbd5e1;
+      margin-bottom: 16px; display: flex; align-items: flex-start;
+      gap: 10px; line-height: 1.6; word-break: break-word; overflow-wrap: break-word;
+    }
+    .contrast-banner .cb-icon { font-size:15px; flex-shrink:0; margin-top:1px; opacity:.8; }
+    .contrast-banner span:last-child { flex:1; min-width:0; }
+    .contrast-banner strong { color:#06b6d4; font-weight:600; }
 
-.context-banner {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  padding: 0 0 16px 0;
-  font-size: 13px;
-  color: #94a3b8;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  line-height: 1.6;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  border-bottom: 1px solid rgba(148,163,184,0.1);
-}
-.context-banner span:first-child { font-size:13px; flex-shrink:0; margin-top:1px; opacity:.6; }
-.context-banner span:last-child  { flex:1; min-width:0; }
-.context-banner strong { color:#cbd5e1; font-weight:600; }
+    .context-banner {
+      padding: 0 0 16px 0; font-size: 13px; color: #94a3b8; margin-bottom: 8px;
+      display: flex; align-items: flex-start; gap: 8px; line-height: 1.6;
+      word-break: break-word; overflow-wrap: break-word;
+      border-bottom: 1px solid rgba(148,163,184,0.1);
+    }
+    .context-banner span:first-child { font-size:13px; flex-shrink:0; margin-top:1px; opacity:.6; }
+    .context-banner span:last-child  { flex:1; min-width:0; }
+    .context-banner strong { color:#cbd5e1; font-weight:600; }
 
-/* ── SECTIONS ── */
-.section { margin-bottom:28px; }
-..section-title {
-  font-size: 11px;
-  font-weight: 700;
-  color: #06b6d4;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 14px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(6,182,212,0.15);
-}
-.section-content {
-  background: rgba(15,23,42,0.4);
-  border: 1px solid rgba(148,163,184,0.08);
-  border-radius: 10px;
-  padding: 18px 20px;
-  color: #cbd5e1;
-  font-size: 14px;
-}
-.section-content p { margin-bottom:10px; }
-.section-content p:last-child { margin-bottom:0; }
+    /* SECTIONS — BUG 1 CORREGIDO: un solo punto en .section-title */
+    .section { margin-bottom:28px; }
+    .section-title {
+      font-size: 11px; font-weight: 700; color: #06b6d4;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid rgba(6,182,212,0.15);
+    }
+    .section-content {
+      background: rgba(15,23,42,0.4); border: 1px solid rgba(148,163,184,0.08);
+      border-radius: 10px; padding: 18px 20px; color: #cbd5e1; font-size: 14px;
+    }
+    .section-content p { margin-bottom:10px; }
+    .section-content p:last-child { margin-bottom:0; }
 
-/* ── BOXES — barra izquierda como único diferenciador ── */
-.challenge-box {
-  background: rgba(15,23,42,0.4);
-  border-left: 3px solid #475569;
-  padding: 12px 14px;
-  border-radius: 0 6px 6px 0;
-  margin: 14px 0;
-  font-size: 14px;
-  color: #cbd5e1;
-}
-.challenge-box strong { color: #e2e8f0; font-weight: 600; }
+    /* BOXES */
+    .challenge-box {
+      background: rgba(15,23,42,0.4); border-left: 3px solid #475569;
+      padding: 12px 14px; border-radius: 0 6px 6px 0;
+      margin: 14px 0; font-size: 14px; color: #cbd5e1;
+    }
+    .challenge-box strong { color: #e2e8f0; font-weight: 600; }
 
-.decision-box {
-  background: rgba(15,23,42,0.4);
-  border-left: 3px solid #06b6d4;
-  padding: 12px 14px;
-  border-radius: 0 6px 6px 0;
-  margin: 10px 0;
-  font-size: 14px;
-  color: #cbd5e1;
-}
-.decision-box strong { color: #e2e8f0; font-weight: 600; }
+    .decision-box {
+      background: rgba(15,23,42,0.4); border-left: 3px solid #06b6d4;
+      padding: 12px 14px; border-radius: 0 6px 6px 0;
+      margin: 10px 0; font-size: 14px; color: #cbd5e1;
+    }
+    .decision-box strong { color: #e2e8f0; font-weight: 600; }
 
-.success-box {
-  background: rgba(15,23,42,0.4);
-  border-left: 3px solid #1e7d6b;
-  padding: 12px 14px;
-  border-radius: 0 6px 6px 0;
-  margin: 10px 0;
-  font-size: 14px;
-  color: #cbd5e1;
-}
-.success-box strong { color: #6ee7b7; font-weight: 600; }
+    .success-box {
+      background: rgba(15,23,42,0.4); border-left: 3px solid #1e7d6b;
+      padding: 12px 14px; border-radius: 0 6px 6px 0;
+      margin: 10px 0; font-size: 14px; color: #cbd5e1;
+    }
+    .success-box strong { color: #6ee7b7; font-weight: 600; }
 
-/* ── SKILLS GRID ── */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-  gap: 12px;
-  margin-top: 4px;
-}
-.skill-card {
-  background: rgba(15,23,42,0.5);
-  border: 1px solid rgba(148,163,184,0.08);
-  border-top: 2px solid #06b6d4;
-  border-radius: 8px;
-  padding: 14px 16px;
-  transition: border-color .2s ease;
-}
-.skill-card:hover { border-top-color: #0891b2; }
-.skill-card strong {
-  color: #e2e8f0;
-  display: block;
-  margin-bottom: 5px;
-  font-size: 13px;
-  font-weight: 600;
-}
-.skill-card p { font-size: 13px; color: #94a3b8; line-height: 1.5; }
-/* ── QUIZ ── */
-.quiz-container {
-  background: rgba(15,23,42,0.5);
-  border: 1px solid rgba(148,163,184,0.08);
-  border-radius: 10px;
-  padding: 24px;
-  margin-bottom: 20px;
-}
-.quiz-progress-wrap { margin-bottom:20px; }
-.quiz-progress-bar-outer {
-  background: rgba(148,163,184,0.1);
-  border-radius: 2px;
-  height: 3px;
-  margin-bottom: 8px;
-}
-.quiz-progress-bar-inner {
-  background: #06b6d4;
-  height: 100%;
-  border-radius: 2px;
-  transition: width .35s ease;
-}
-.quiz-progress-text { font-size:11px; color:#334155; text-align:right; letter-spacing:.3px; }
+    /* SKILLS GRID */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 12px; margin-top: 4px;
+    }
+    .skill-card {
+      background: rgba(15,23,42,0.5); border: 1px solid rgba(148,163,184,0.08);
+      border-top: 2px solid #06b6d4; border-radius: 8px; padding: 14px 16px;
+      transition: border-color .2s ease;
+    }
+    .skill-card:hover { border-top-color: #0891b2; }
+    .skill-card strong { color: #e2e8f0; display: block; margin-bottom: 5px; font-size: 13px; font-weight: 600; }
+    .skill-card p { font-size: 13px; color: #94a3b8; line-height: 1.5; }
 
-.quiz-question { font-size:16px; font-weight:500; color:#e2e8f0; margin-bottom:20px; line-height:1.65; }
-.quiz-options  { display:flex; flex-direction:column; gap:10px; }
-.quiz-option {
-  background: rgba(15,23,42,0.5);
-  border: 1px solid rgba(148,163,184,0.1);
-  padding: 13px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all .18s;
-}
-.quiz-option:hover:not(.disabled) { border-color: rgba(6,182,212,0.4); background: rgba(6,182,212,0.04); }
-.quiz-option input[type="radio"]  { margin-right:10px; accent-color:#06b6d4; }
-.quiz-option label { cursor:pointer; color:#cbd5e1; line-height:1.55; font-size:14px; }
-.quiz-option.disabled  { cursor:not-allowed; opacity:.65; }
-.quiz-option.correct   { border-color:rgba(110,231,183,0.4); background:rgba(110,231,183,0.05); }
-.quiz-option.correct label { color:#6ee7b7; }
-.quiz-option.incorrect { border-color:rgba(148,163,184,0.2); }
-.quiz-option.incorrect label { color:#475569; }
+    /* QUIZ */
+    /* P4 CORREGIDO: banner de instrucción de entrada al quiz */
+    .quiz-intro {
+      background: rgba(168,85,247,0.07); border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #94a3b8;
+      margin-bottom: 24px; line-height: 1.6;
+    }
+    .quiz-intro strong { color: #d8b4fe; }
 
-.quiz-feedback {
-  margin-top:16px; padding:14px 16px; border-radius:8px;
-  display:none; line-height:1.65; font-size:13.5px;
-  border: 1px solid transparent;
-}
-.quiz-feedback.show    { display:block; animation:fadeIn .3s ease; }
-.quiz-feedback.correct {
-  background: rgba(110,231,183,0.05);
-  border-color: rgba(110,231,183,0.2);
-  color: #94a3b8;
-}
-.quiz-feedback.correct strong  { color:#6ee7b7; }
-.quiz-feedback.incorrect {
-  background: rgba(15,23,42,0.4);
-  border-color: rgba(148,163,184,0.1);
-  color: #94a3b8;
-}
+    .quiz-container {
+      background: rgba(15,23,42,0.5); border: 1px solid rgba(148,163,184,0.08);
+      border-radius: 10px; padding: 24px; margin-bottom: 20px;
+    }
+    .quiz-progress-wrap { margin-bottom:20px; }
+    .quiz-progress-bar-outer {
+      background: rgba(148,163,184,0.1); border-radius: 2px; height: 3px; margin-bottom: 8px;
+    }
+    .quiz-progress-bar-inner {
+      background: #06b6d4; height: 100%; border-radius: 2px; transition: width .35s ease;
+    }
+    .quiz-progress-text { font-size:11px; color:#475569; text-align:right; letter-spacing:.3px; }
 
-.quiz-btn {
-  background: #06b6d4;
-  color: #0f172a;
-  border: none;
-  padding: 10px 22px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all .2s;
-  margin-top: 14px;
-  display: none;
-  letter-spacing: 0.2px;
-}
-.quiz-btn.show  { display:inline-block; }
-.quiz-btn:hover { background:#0891b2; transform:translateY(-1px); }
+    .quiz-question { font-size:16px; font-weight:500; color:#e2e8f0; margin-bottom:20px; line-height:1.65; }
+    .quiz-options  { display:flex; flex-direction:column; gap:10px; }
+    .quiz-option {
+      background: rgba(15,23,42,0.5); border: 1px solid rgba(148,163,184,0.1);
+      padding: 13px 16px; border-radius: 8px; cursor: pointer; transition: all .18s;
+    }
+    .quiz-option:hover:not(.disabled) { border-color:rgba(6,182,212,0.4); background:rgba(6,182,212,0.04); }
+    .quiz-option input[type="radio"]  { margin-right:10px; accent-color:#06b6d4; }
+    .quiz-option label { cursor:pointer; color:#cbd5e1; line-height:1.55; font-size:14px; }
+    .quiz-option.disabled  { cursor:not-allowed; }
+    .quiz-option.correct   { border-color:rgba(110,231,183,0.4); background:rgba(110,231,183,0.05); }
+    .quiz-option.correct label { color:#6ee7b7; }
+    /* P2 CORREGIDO: incorrecto mantiene texto legible en lugar de apagarlo */
+    .quiz-option.incorrect { border-color:rgba(239,68,68,0.25); background:rgba(239,68,68,0.04); }
+    .quiz-option.incorrect label { color:#94a3b8; }
 
-/* ── RESULTS ── */
-.results-container {
-  background: rgba(15,23,42,0.6);
-  border: 1px solid rgba(168,85,247,0.2);
-  border-radius: 10px;
-  padding: 36px;
-  text-align: center;
-}
-.results-score   { font-size:56px; font-weight:800; color:#e2e8f0; margin:16px 0; letter-spacing:-2px; }
-.results-message { font-size:14px; color:#64748b; line-height:1.75; margin-bottom:24px; }
-.results-message strong { color:#94a3b8; }
-.reset-btn {
-  background: transparent;
-  color: #06b6d4;
-  border: 1px solid rgba(6,182,212,0.3);
-  padding: 10px 24px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all .2s;
-  letter-spacing: 0.2px;
-}
-.reset-btn:hover { background:rgba(6,182,212,0.08); border-color:#06b6d4; }
+    .quiz-feedback {
+      margin-top:16px; padding:14px 16px; border-radius:8px;
+      display:none; line-height:1.65; font-size:13.5px; border: 1px solid transparent;
+    }
+    .quiz-feedback.show    { display:block; animation:fadeIn .3s ease; }
+    .quiz-feedback.correct {
+      background: rgba(110,231,183,0.05); border-color: rgba(110,231,183,0.2); color: #cbd5e1;
+    }
+    .quiz-feedback.correct strong  { color:#6ee7b7; }
+    .quiz-feedback.incorrect {
+      background: rgba(15,23,42,0.4); border-color: rgba(148,163,184,0.15); color: #cbd5e1;
+    }
+    .quiz-feedback.incorrect strong { color:#fca5a5; }
 
-/* ── SCROLLBAR ── */
-.scrollbar-hide::-webkit-scrollbar { display:none; }
+    .quiz-btn {
+      background: #06b6d4; color: #0f172a; border: none;
+      padding: 10px 22px; border-radius: 6px; font-size: 13px; font-weight: 700;
+      cursor: pointer; transition: all .2s; margin-top: 14px; display: none; letter-spacing: 0.2px;
+    }
+    .quiz-btn.show  { display:inline-block; }
+    .quiz-btn:hover { background:#0891b2; transform:translateY(-1px); }
 
-/* ── RESPONSIVE ── */
-@media (max-width:768px) {
-  body { overflow:auto; }
-  .main-content { flex-direction:column; overflow:visible; }
-  .sidebar {
-    width:100%; border-right:none;
-    border-bottom: 1px solid rgba(148,163,184,0.08);
-    max-height:140px; padding:12px 16px;
-    display:flex; overflow-x:auto;
-  }
-  .sidebar h2 { display:none; }
-  .case-list  { display:flex; gap:6px; flex-wrap:nowrap; align-items:center; }
-  .case-item  { margin:0; white-space:nowrap; flex-shrink:0; }
-  .content-area { padding:20px 16px; overflow:visible; }
-  .header h1 { font-size:20px; }
-  .case-title h2 { font-size:19px; }
-  .skills-grid { grid-template-columns:1fr; }
-}
+    /* RESULTS — P3 CORREGIDO: results-message con color legible */
+    .results-container {
+      background: rgba(15,23,42,0.6); border: 1px solid rgba(168,85,247,0.2);
+      border-radius: 10px; padding: 36px; text-align: center;
+    }
+    .results-score   { font-size:56px; font-weight:800; color:#e2e8f0; margin:16px 0; letter-spacing:-2px; }
+    .results-message { font-size:14px; color:#94a3b8; line-height:1.75; margin-bottom:24px; }
+    .results-message strong { color:#e2e8f0; }
+    .reset-btn {
+      background: transparent; color: #06b6d4; border: 1px solid rgba(6,182,212,0.3);
+      padding: 10px 24px; border-radius: 6px; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all .2s; letter-spacing: 0.2px;
+    }
+    .reset-btn:hover { background:rgba(6,182,212,0.08); border-color:#06b6d4; }
+
+    /* SCROLLBAR */
+    .scrollbar-hide::-webkit-scrollbar { display:none; }
+
+    /* RESPONSIVE */
+    @media (max-width:768px) {
+      body { overflow:auto; }
+      .main-content { flex-direction:column; overflow:visible; }
+      .sidebar {
+        width:100%; border-right:none; border-bottom:1px solid rgba(148,163,184,0.08);
+        max-height:140px; padding:12px 16px; display:flex; overflow-x:auto;
+      }
+      .sidebar h2 { display:none; }
+      .case-list  { display:flex; gap:6px; flex-wrap:nowrap; align-items:center; }
+      .case-item  { margin:0; white-space:nowrap; flex-shrink:0; }
+      .content-area { padding:20px 16px; overflow:visible; }
+      .header h1 { font-size:20px; }
+      .case-title-text h2 { font-size:19px; }
+      .skills-grid { grid-template-columns:1fr; }
+    }
   </style>
 </head>
 <body>
@@ -382,7 +280,7 @@ body {
 
   <div class="header">
     <div class="header-content">
-      <h1>🌊 Navegador de Crisis</h1>
+      <h1>🌊 <span>Navegador de Crisis</span></h1>
       <p>Crisis reales en empresas de servicios · Volatilidad · Incertidumbre · Complejidad · Ambigüedad</p>
     </div>
   </div>
@@ -644,6 +542,10 @@ body {
               <p>Pon a prueba tu comprensión de los cuatro tipos de entorno complejo</p>
             </div>
           </div>
+          <!-- P4 CORREGIDO: instrucción de entrada al quiz -->
+          <div class="quiz-intro">
+            <strong>Instrucciones:</strong> Cuatro preguntas, una por caso. Selecciona la opción que mejor explica la lógica de gestión detrás de las decisiones tomadas. Después de responder cada pregunta verás la explicación completa antes de continuar.
+          </div>
           <div id="quiz-content"></div>
           <div id="quiz-results" style="display:none;">
             <div class="results-container">
@@ -661,136 +563,171 @@ body {
 </div>
 
 <script>
-document.querySelectorAll('.case-item').forEach(function(item) {
-  item.addEventListener('click', function() {
-    var caseId = item.dataset.case;
-    document.querySelectorAll('.case-item').forEach(function(i) { i.classList.remove('active'); });
-    document.querySelectorAll('.case-view').forEach(function(v) { v.classList.remove('active'); });
-    item.classList.add('active');
-    document.querySelector('.case-view[data-case="' + caseId + '"]').classList.add('active');
-    document.querySelector('.content-area').scrollTop = 0;
-    if (caseId === 'quiz') loadQuiz();
+  /* NAVEGACIÓN */
+  document.querySelectorAll('.case-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+      var caseId = item.dataset.case;
+      document.querySelectorAll('.case-item').forEach(function(i) { i.classList.remove('active'); });
+      document.querySelectorAll('.case-view').forEach(function(v) { v.classList.remove('active'); });
+      item.classList.add('active');
+      document.querySelector('.case-view[data-case="' + caseId + '"]').classList.add('active');
+      document.querySelector('.content-area').scrollTop = 0;
+      /* BUG 3 CORREGIDO: resetear estado del quiz al navegar hacia él */
+      if (caseId === 'quiz') {
+        currentQuestionIndex = 0;
+        score = 0;
+        answered = false;
+        document.getElementById('quiz-content').style.display = 'block';
+        document.getElementById('quiz-results').style.display = 'none';
+        loadQuiz();
+      }
+    });
   });
-});
 
-var quizQuestions = [
-  {
-    id:1,
-    question:"En el caso 'Cambio de Mercado', ¿qué tipo de entorno VUCA es predominante y por qué la estrategia de 'experimentos rápidos' fue efectiva?",
-    options:[
-      "Complejidad — porque había muchas variables que analizar antes de actuar",
-      "Volatilidad — porque el mercado cambiaba rápidamente y era mejor probar y ajustar antes que planificar de forma perfecta",
-      "Ambigüedad — porque no se entendía la causa del problema",
-      "Incertidumbre — porque no había información disponible sobre las tendencias"
-    ],
-    correct:1,
-    feedback:"La <strong>Volatilidad</strong> se caracteriza por cambios rápidos en el entorno. La estrategia de experimentos rápidos permite adaptarse sin necesidad de planes perfectos que quedarían obsoletos en poco tiempo. Su antídoto es la <strong>agilidad</strong>: actuar, medir y ajustar."
-  },
-  {
-    id:2,
-    question:"En 'Transformación Digital', ¿por qué la decisión de 'pausar y diagnosticar' fue más valiosa que presionar la adopción del sistema?",
-    options:[
-      "Porque la complejidad requiere entender la interconexión de factores (técnicos, culturales, operativos) antes de forzar una solución",
-      "Porque era necesario esperar a que el mercado se estabilizara",
-      "Porque el sistema era demasiado costoso para implementarlo rápidamente",
-      "Porque el personal necesitaba más motivación emocional"
-    ],
-    correct:0,
-    feedback:"La <strong>Complejidad</strong> organizacional surge de múltiples factores interconectados. Pausar permitió diagnosticar los obstáculos reales —técnicos Y culturales— en lugar de asumir que solo era 'resistencia al cambio'. Su antídoto es la <strong>comprensión profunda</strong> antes de la acción."
-  },
-  {
-    id:3,
-    question:"En 'Crisis de Suministros', ¿qué principio de gestión de la Incertidumbre se aplicó con el 'menú adaptativo' y la comunicación transparente?",
-    options:[
-      "Reducir el impacto de la incertidumbre mediante información y flexibilidad adaptativa",
-      "Eliminar completamente la incertidumbre con planificación perfecta",
-      "Ignorar la incertidumbre y mantener el menú original a cualquier costo",
-      "Transferir la incertidumbre a los proveedores mediante contratos rígidos"
-    ],
-    correct:0,
-    feedback:"En contextos de <strong>Incertidumbre</strong> no es posible eliminar la falta de información, pero sí reducir su impacto: (1) la comunicación transparente genera confianza mientras no hay certeza, y (2) los sistemas adaptativos funcionan bajo múltiples escenarios posibles. Su antídoto es la <strong>información y la flexibilidad</strong>."
-  },
-  {
-    id:4,
-    question:"En 'Gestión de Personal', ¿qué antídoto VUCA se aplicó al construir los estándares junto con el equipo en lugar de imponerlos?",
-    options:[
-      "Agilidad — para responder rápido a los cambios",
-      "Visión — para mantener el propósito claro en el largo plazo",
-      "Claridad — para eliminar la ambigüedad mediante una definición participativa",
-      "Comprensión profunda — para analizar las causas de fondo"
-    ],
-    correct:2,
-    feedback:"La <strong>Ambigüedad</strong> se combate con <strong>Claridad</strong>. Al construir los estándares junto con el equipo se eliminó la ambigüedad Y se generó apropiación colectiva: el equipo participó en definir qué significa 'excelencia' en su propio contexto, lo que hace el estándar más duradero."
+  /* DATOS DEL QUIZ */
+  var quizQuestions = [
+    {
+      id: 1,
+      question: "En el caso 'Cambio de Mercado', ¿qué tipo de entorno VUCA es predominante y por qué la estrategia de 'experimentos rápidos' fue efectiva?",
+      options: [
+        "Complejidad — porque había muchas variables que analizar antes de actuar",
+        "Volatilidad — porque el mercado cambiaba rápidamente y era mejor probar y ajustar antes que planificar de forma perfecta",
+        "Ambigüedad — porque no se entendía la causa del problema",
+        "Incertidumbre — porque no había información disponible sobre las tendencias"
+      ],
+      correct: 1,
+      feedback: "La <strong>Volatilidad</strong> se caracteriza por cambios rápidos en el entorno. La estrategia de experimentos rápidos permite adaptarse sin necesidad de planes perfectos que quedarían obsoletos en poco tiempo. Su antídoto es la <strong>agilidad</strong>: actuar, medir y ajustar."
+    },
+    {
+      id: 2,
+      question: "En 'Transformación Digital', ¿por qué la decisión de 'pausar y diagnosticar' fue más valiosa que presionar la adopción del sistema?",
+      options: [
+        "Porque la complejidad requiere entender la interconexión de factores (técnicos, culturales, operativos) antes de forzar una solución",
+        "Porque era necesario esperar a que el mercado se estabilizara",
+        "Porque el sistema era demasiado costoso para implementarlo rápidamente",
+        "Porque el personal necesitaba más motivación emocional"
+      ],
+      correct: 0,
+      feedback: "La <strong>Complejidad</strong> organizacional surge de múltiples factores interconectados. Pausar permitió diagnosticar los obstáculos reales —técnicos Y culturales— en lugar de asumir que solo era 'resistencia al cambio'. Su antídoto es la <strong>comprensión profunda</strong> antes de la acción."
+    },
+    {
+      id: 3,
+      question: "En 'Crisis de Suministros', ¿qué principio de gestión de la Incertidumbre se aplicó con el 'menú adaptativo' y la comunicación transparente?",
+      options: [
+        "Reducir el impacto de la incertidumbre mediante información y flexibilidad adaptativa",
+        "Eliminar completamente la incertidumbre con planificación perfecta",
+        "Ignorar la incertidumbre y mantener el menú original a cualquier costo",
+        "Transferir la incertidumbre a los proveedores mediante contratos rígidos"
+      ],
+      correct: 0,
+      feedback: "En contextos de <strong>Incertidumbre</strong> no es posible eliminar la falta de información, pero sí reducir su impacto: (1) la comunicación transparente genera confianza mientras no hay certeza, y (2) los sistemas adaptativos funcionan bajo múltiples escenarios posibles. Su antídoto es la <strong>información y la flexibilidad</strong>."
+    },
+    {
+      id: 4,
+      question: "En 'Gestión de Personal', ¿qué antídoto VUCA se aplicó al construir los estándares junto con el equipo en lugar de imponerlos?",
+      options: [
+        "Agilidad — para responder rápido a los cambios",
+        "Visión — para mantener el propósito claro en el largo plazo",
+        "Claridad — para eliminar la ambigüedad mediante una definición participativa",
+        "Comprensión profunda — para analizar las causas de fondo"
+      ],
+      correct: 2,
+      feedback: "La <strong>Ambigüedad</strong> se combate con <strong>Claridad</strong>. Al construir los estándares junto con el equipo se eliminó la ambigüedad Y se generó apropiación colectiva: el equipo participó en definir qué significa 'excelencia' en su propio contexto, lo que hace el estándar más duradero."
+    }
+  ];
+
+  var currentQuestionIndex = 0, score = 0, answered = false;
+
+  function loadQuiz() {
+    var q   = quizQuestions[currentQuestionIndex];
+    var pct = Math.round((currentQuestionIndex / quizQuestions.length) * 100);
+    document.getElementById('quiz-content').innerHTML =
+      '<div class="quiz-container">' +
+        '<div class="quiz-progress-wrap">' +
+          '<div class="quiz-progress-bar-outer">' +
+            '<div class="quiz-progress-bar-inner" style="width:' + pct + '%"></div>' +
+          '</div>' +
+          '<div class="quiz-progress-text">Pregunta ' + (currentQuestionIndex + 1) + ' de ' + quizQuestions.length + '</div>' +
+        '</div>' +
+        '<div class="quiz-question">' + q.question + '</div>' +
+        '<div class="quiz-options" id="options-' + q.id + '">' +
+          q.options.map(function(opt, i) {
+            return '<div class="quiz-option" id="option-' + q.id + '-' + i + '">' +
+              '<input type="radio" id="q' + q.id + '-' + i + '" name="question-' + q.id + '" value="' + i + '" onchange="selectAnswer(' + q.id + ')">' +
+              '<label for="q' + q.id + '-' + i + '">' + String.fromCharCode(65 + i) + ') ' + opt + '</label>' +
+            '</div>';
+          }).join('') +
+        '</div>' +
+        '<button class="quiz-btn" id="submit-' + q.id + '" onclick="submitAnswer(' + q.id + ')">Verificar Respuesta</button>' +
+        '<div class="quiz-feedback" id="feedback-' + q.id + '"></div>' +
+      '</div>';
+    answered = false;
   }
-];
 
-var currentQuestionIndex = 0, score = 0, answered = false;
+  function selectAnswer(qId) {
+    document.getElementById('submit-' + qId).classList.add('show');
+  }
 
-function loadQuiz() {
-  var q   = quizQuestions[currentQuestionIndex];
-  var pct = Math.round((currentQuestionIndex / quizQuestions.length) * 100);
-  document.getElementById('quiz-content').innerHTML =
-    '<div class="quiz-container">' +
-    '<div class="quiz-progress-wrap"><div class="quiz-progress-bar-outer">' +
-    '<div class="quiz-progress-bar-inner" style="width:' + pct + '%"></div></div>' +
-    '<div class="quiz-progress-text">Pregunta ' + (currentQuestionIndex+1) + ' de ' + quizQuestions.length + '</div></div>' +
-    '<div class="quiz-question">' + q.question + '</div>' +
-    '<div class="quiz-options" id="options-' + q.id + '">' +
-    q.options.map(function(opt,i){
-      return '<div class="quiz-option" id="option-'+q.id+'-'+i+'">' +
-        '<input type="radio" id="q'+q.id+'-'+i+'" name="question-'+q.id+'" value="'+i+'" onchange="selectAnswer('+q.id+')">' +
-        '<label for="q'+q.id+'-'+i+'">'+String.fromCharCode(65+i)+') '+opt+'</label></div>';
-    }).join('') + '</div>' +
-    '<button class="quiz-btn" id="submit-'+q.id+'" onclick="submitAnswer('+q.id+')">Verificar Respuesta</button>' +
-    '<div class="quiz-feedback" id="feedback-'+q.id+'"></div></div>';
-  answered = false;
-}
+  function submitAnswer(qId) {
+    if (answered) return;
+    answered = true;
+    var q   = quizQuestions[currentQuestionIndex];
+    var sel = document.querySelector('input[name="question-' + qId + '"]:checked');
+    if (!sel) { alert('Por favor selecciona una respuesta antes de continuar.'); answered = false; return; }
+    var idx = parseInt(sel.value);
+    var ok  = idx === q.correct;
+    document.querySelectorAll('#options-' + qId + ' .quiz-option').forEach(function(opt, i) {
+      opt.classList.add('disabled');
+      var r = opt.querySelector('input');
+      if (r) r.disabled = true;
+      if (i === q.correct) opt.classList.add('correct');
+      else if (i === idx && !ok) opt.classList.add('incorrect');
+    });
+    var fb = document.getElementById('feedback-' + qId);
+    fb.classList.add('show', ok ? 'correct' : 'incorrect');
+    fb.innerHTML = '<strong>' + (ok ? '✓ ¡Correcto!' : '✗ Incorrecto — La respuesta correcta es ' + String.fromCharCode(65 + q.correct)) + '</strong><br><br>' + q.feedback;
+    if (ok) score++;
+    document.getElementById('submit-' + qId).style.display = 'none';
+    var btn = document.createElement('button');
+    btn.className = 'quiz-btn show';
+    if (currentQuestionIndex < quizQuestions.length - 1) {
+      btn.textContent = 'Siguiente Pregunta →';
+      btn.onclick = nextQuestion;
+    } else {
+      btn.textContent = 'Ver Resultados Finales →';
+      btn.onclick = showResults;
+    }
+    fb.parentElement.appendChild(btn);
+  }
 
-function selectAnswer(qId) { document.getElementById('submit-'+qId).classList.add('show'); }
+  function nextQuestion() {
+    currentQuestionIndex++;
+    loadQuiz();
+    document.querySelector('.content-area').scrollTop = 0;
+  }
 
-function submitAnswer(qId) {
-  if (answered) return; answered = true;
-  var q   = quizQuestions[currentQuestionIndex];
-  var sel = document.querySelector('input[name="question-'+qId+'"]:checked');
-  if (!sel) { alert('Por favor selecciona una respuesta antes de continuar.'); answered=false; return; }
-  var idx = parseInt(sel.value), ok = idx === q.correct;
-  document.querySelectorAll('#options-'+qId+' .quiz-option').forEach(function(opt,i){
-    opt.classList.add('disabled');
-    var r = opt.querySelector('input'); if(r) r.disabled=true;
-    if(i===q.correct) opt.classList.add('correct');
-    else if(i===idx&&!ok) opt.classList.add('incorrect');
-  });
-  var fb = document.getElementById('feedback-'+qId);
-  fb.classList.add('show', ok?'correct':'incorrect');
-  fb.innerHTML='<strong>'+(ok?'✓ ¡Correcto!':'✗ Incorrecto — La respuesta correcta es '+String.fromCharCode(65+q.correct))+'</strong><br><br>'+q.feedback;
-  if(ok) score++;
-  document.getElementById('submit-'+qId).style.display='none';
-  var btn=document.createElement('button'); btn.className='quiz-btn show';
-  if(currentQuestionIndex < quizQuestions.length-1){ btn.textContent='Siguiente Pregunta →'; btn.onclick=nextQuestion; }
-  else { btn.textContent='Ver Resultados Finales →'; btn.onclick=showResults; }
-  fb.parentElement.appendChild(btn);
-}
+  function showResults() {
+    document.getElementById('quiz-content').style.display = 'none';
+    document.getElementById('quiz-results').style.display = 'block';
+    var pct = (score / quizQuestions.length) * 100;
+    var msg;
+    if      (pct === 100) msg = '🏆 <strong>¡Dominio excepcional!</strong><br><br>Has demostrado comprensión profunda de los cuatro tipos de entorno y sus estrategias de respuesta.';
+    else if (pct >= 75)   msg = '🎯 <strong>Muy buen análisis estratégico</strong><br><br>Comprendes los principios fundamentales. Revisa los casos donde tu respuesta fue incorrecta para afinar la distinción entre los cuatro tipos de entorno.';
+    else if (pct >= 50)   msg = '📚 <strong>Conocimiento básico adquirido</strong><br><br>Captas las ideas principales. Revisa los 4 casos nuevamente, prestando atención a cómo cada tipo de entorno requiere un enfoque específico de respuesta.';
+    else                  msg = '💪 <strong>Es momento de reforzar los conceptos</strong><br><br>Revisa los casos con más detalle, identificando qué tipo de entorno representa cada uno y por qué las decisiones tomadas fueron efectivas en ese contexto particular.';
+    document.getElementById('final-score').textContent = score + '/' + quizQuestions.length;
+    document.getElementById('final-message').innerHTML = msg;
+  }
 
-function nextQuestion(){ currentQuestionIndex++; loadQuiz(); document.querySelector('.content-area').scrollTop=0; }
-
-function showResults(){
-  document.getElementById('quiz-content').style.display='none';
-  document.getElementById('quiz-results').style.display='block';
-  var pct=(score/quizQuestions.length)*100, msg;
-  if(pct===100) msg='🏆 <strong>¡Dominio excepcional!</strong><br><br>Has demostrado comprensión profunda de los cuatro tipos de entorno y sus estrategias de respuesta.';
-  else if(pct>=75) msg='🎯 <strong>Muy buen análisis estratégico</strong><br><br>Comprendes los principios fundamentales. Revisa los casos donde tu respuesta fue incorrecta para afinar la distinción entre los cuatro tipos de entorno.';
-  else if(pct>=50) msg='📚 <strong>Conocimiento básico adquirido</strong><br><br>Captas las ideas principales. Revisa los 4 casos nuevamente, prestando atención a cómo cada tipo de entorno requiere un enfoque específico de respuesta.';
-  else msg='💪 <strong>Es momento de reforzar los conceptos</strong><br><br>Revisa los casos con más detalle, identificando qué tipo de entorno representa cada uno y por qué las decisiones tomadas fueron efectivas en ese contexto particular.';
-  document.getElementById('final-score').textContent=score+'/'+quizQuestions.length;
-  document.getElementById('final-message').innerHTML=msg;
-}
-
-function resetQuiz(){
-  currentQuestionIndex=0; score=0; answered=false;
-  document.getElementById('quiz-content').style.display='block';
-  document.getElementById('quiz-results').style.display='none';
-  loadQuiz(); document.querySelector('.content-area').scrollTop=0;
-}
+  function resetQuiz() {
+    currentQuestionIndex = 0;
+    score = 0;
+    answered = false;
+    document.getElementById('quiz-content').style.display  = 'block';
+    document.getElementById('quiz-results').style.display  = 'none';
+    loadQuiz();
+    document.querySelector('.content-area').scrollTop = 0;
+  }
 </script>
 </body>
 </html>
