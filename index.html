@@ -22,25 +22,28 @@
 
     .app-wrapper { width:100%; height:100%; display:flex; flex-direction:column; overflow:auto; }
 
-    /* HEADER */
+    /* ── MEJORA 1: HEADER con borde acento + gradient solo en texto ── */
     .header {
       background: rgba(15,23,42,0.98);
-      border-bottom: 1px solid rgba(148,163,184,0.1);
+      border-bottom: 3px solid #06b6d4;
       padding: 18px 24px;
       backdrop-filter: blur(10px);
       flex-shrink: 0;
     }
     .header-content { max-width:1200px; margin:0 auto; }
     .header h1 {
-      font-size: 24px; font-weight: 700; color: #f1f5f9;
+      font-size: 24px; font-weight: 700;
       letter-spacing: -0.3px; margin-bottom: 3px;
+      color: #f1f5f9;
     }
-    .header h1 span {
+    /* Gradient aplicado solo al texto, no al emoji */
+    .header h1 .title-text {
       background: linear-gradient(135deg, #06b6d4, #0891b2);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .header p { font-size:12px; color:#64748b; letter-spacing:0.3px; }
+    .header p { font-size:12px; color:#475569; letter-spacing:0.3px; margin-top:2px; }
 
     /* USAGE BANNER */
     .usage-banner {
@@ -54,26 +57,50 @@
     /* LAYOUT */
     .main-content { flex:1; display:flex; overflow:hidden; }
 
+    /* ── MEJORA 2: SIDEBAR con jerarquía visual mejorada ── */
     .sidebar {
-      width: 260px; background: rgba(15,23,42,0.6);
+      width: 260px;
+      background: rgba(15,23,42,0.7);
       border-right: 1px solid rgba(148,163,184,0.08);
-      padding: 20px 0; overflow-y: auto; flex-shrink: 0;
+      padding: 24px 0;
+      overflow-y: auto;
+      flex-shrink: 0;
     }
     .sidebar h2 {
       font-size: 10px; text-transform: uppercase; letter-spacing: 2px;
-      color: #334155; padding: 0 20px; margin-bottom: 12px; font-weight: 600;
+      color: #334155; padding: 0 20px; margin-bottom: 16px; font-weight: 600;
     }
     .case-list { list-style:none; }
     .case-item {
-      padding: 10px 16px; margin: 2px 8px; border-radius: 6px; cursor: pointer;
+      padding: 11px 16px; margin: 1px 8px; border-radius: 6px; cursor: pointer;
       transition: all .2s ease; border-left: 2px solid transparent;
-      font-size: 13px; color: #64748b; font-weight: 500;
+      font-size: 13px; color: #94a3b8; font-weight: 500;
+      display: flex; align-items: center; gap: 8px;
     }
-    .case-item:hover { background:rgba(148,163,184,0.07); color:#94a3b8; border-left-color:#334155; }
-    .case-item.active { background:rgba(6,182,212,0.08); border-left-color:#06b6d4; color:#e2e8f0; font-weight:600; }
-    .quiz-item { color:#64748b; }
-    .quiz-item.active { background:rgba(168,85,247,0.1); border-left-color:#a855f7; color:#e2e8f0; }
-    .quiz-item:hover  { border-left-color:#7c3aed; color:#94a3b8; }
+    .case-item:hover {
+      background: rgba(148,163,184,0.1);
+      color: #cbd5e1;
+      border-left-color: #475569;
+    }
+    .case-item.active {
+      background: rgba(6,182,212,0.1);
+      border-left-color: #06b6d4;
+      color: #e2e8f0;
+      font-weight: 600;
+    }
+    /* Separador visual antes del quiz */
+    .quiz-item {
+      margin-top: 12px;
+      border-top: 1px solid rgba(148,163,184,0.08);
+      padding-top: 12px;
+      color: #94a3b8;
+    }
+    .quiz-item.active {
+      background: rgba(168,85,247,0.1);
+      border-left-color: #a855f7;
+      color: #e2e8f0;
+    }
+    .quiz-item:hover { border-left-color: #7c3aed; color: #cbd5e1; }
 
     /* CONTENT */
     .content-area { flex:1; padding:32px; overflow-y:auto; }
@@ -84,7 +111,7 @@
 
     @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 
-    /* CASE HEADER — BUG 2 CORREGIDO: display:flex en .case-title */
+    /* CASE HEADER */
     .case-title {
       display: flex; align-items: center; gap: 14px;
       margin-bottom: 24px;
@@ -128,7 +155,7 @@
     .context-banner span:last-child  { flex:1; min-width:0; }
     .context-banner strong { color:#cbd5e1; font-weight:600; }
 
-    /* SECTIONS — BUG 1 CORREGIDO: un solo punto en .section-title */
+    /* SECTIONS */
     .section { margin-bottom:28px; }
     .section-title {
       font-size: 11px; font-weight: 700; color: #06b6d4;
@@ -165,22 +192,46 @@
     }
     .success-box strong { color: #6ee7b7; font-weight: 600; }
 
-    /* SKILLS GRID */
+    /* ── MEJORA 3: SKILL CARDS con numeración y mejor jerarquía ── */
     .skills-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
       gap: 12px; margin-top: 4px;
+      counter-reset: skill-counter;
     }
     .skill-card {
-      background: rgba(15,23,42,0.5); border: 1px solid rgba(148,163,184,0.08);
-      border-top: 2px solid #06b6d4; border-radius: 8px; padding: 14px 16px;
-      transition: border-color .2s ease;
+      background: rgba(15,23,42,0.5);
+      border: 1px solid rgba(148,163,184,0.08);
+      border-top: 2px solid #06b6d4;
+      border-radius: 8px;
+      padding: 14px 16px;
+      transition: all .2s ease;
+      counter-increment: skill-counter;
+      position: relative;
     }
-    .skill-card:hover { border-top-color: #0891b2; }
-    .skill-card strong { color: #e2e8f0; display: block; margin-bottom: 5px; font-size: 13px; font-weight: 600; }
-    .skill-card p { font-size: 13px; color: #94a3b8; line-height: 1.5; }
+    .skill-card::before {
+      content: counter(skill-counter, decimal-leading-zero);
+      position: absolute;
+      top: 12px; right: 14px;
+      font-size: 11px; font-weight: 700;
+      color: rgba(6,182,212,0.35);
+      letter-spacing: 0.5px;
+    }
+    .skill-card:hover {
+      border-top-color: #0891b2;
+      background: rgba(15,23,42,0.7);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .skill-card strong {
+      color: #e2e8f0; display: block;
+      margin-bottom: 6px; font-size: 13px; font-weight: 600;
+      padding-right: 24px; /* espacio para el número */
+      line-height: 1.4;
+    }
+    .skill-card p { font-size: 12.5px; color: #64748b; line-height: 1.5; }
 
-    /* QUIZ */
-    /* P4 CORREGIDO: banner de instrucción de entrada al quiz */
+    /* QUIZ INTRO */
     .quiz-intro {
       background: rgba(168,85,247,0.07); border: 1px solid rgba(168,85,247,0.2);
       border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #94a3b8;
@@ -188,18 +239,32 @@
     }
     .quiz-intro strong { color: #d8b4fe; }
 
+    /* ── MEJORA 4: BARRA DE PROGRESO más visible con porcentaje ── */
     .quiz-container {
       background: rgba(15,23,42,0.5); border: 1px solid rgba(148,163,184,0.08);
       border-radius: 10px; padding: 24px; margin-bottom: 20px;
     }
-    .quiz-progress-wrap { margin-bottom:20px; }
+    .quiz-progress-wrap { margin-bottom: 24px; }
+    .quiz-progress-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 8px;
+    }
+    .quiz-progress-label {
+      font-size: 11px; font-weight: 700; color: #475569;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .quiz-progress-counter {
+      font-size: 12px; color: #06b6d4; font-weight: 600;
+    }
     .quiz-progress-bar-outer {
-      background: rgba(148,163,184,0.1); border-radius: 2px; height: 3px; margin-bottom: 8px;
+      background: rgba(148,163,184,0.1);
+      border-radius: 4px; height: 6px;
     }
     .quiz-progress-bar-inner {
-      background: #06b6d4; height: 100%; border-radius: 2px; transition: width .35s ease;
+      background: linear-gradient(90deg, #06b6d4, #0891b2);
+      height: 100%; border-radius: 4px; transition: width .4s ease;
+      box-shadow: 0 0 6px rgba(6,182,212,0.4);
     }
-    .quiz-progress-text { font-size:11px; color:#475569; text-align:right; letter-spacing:.3px; }
 
     .quiz-question { font-size:16px; font-weight:500; color:#e2e8f0; margin-bottom:20px; line-height:1.65; }
     .quiz-options  { display:flex; flex-direction:column; gap:10px; }
@@ -210,10 +275,9 @@
     .quiz-option:hover:not(.disabled) { border-color:rgba(6,182,212,0.4); background:rgba(6,182,212,0.04); }
     .quiz-option input[type="radio"]  { margin-right:10px; accent-color:#06b6d4; }
     .quiz-option label { cursor:pointer; color:#cbd5e1; line-height:1.55; font-size:14px; }
-    .quiz-option.disabled  { cursor:not-allowed; }
-    .quiz-option.correct   { border-color:rgba(110,231,183,0.4); background:rgba(110,231,183,0.05); }
+    .quiz-option.disabled { cursor:not-allowed; }
+    .quiz-option.correct  { border-color:rgba(110,231,183,0.4); background:rgba(110,231,183,0.05); }
     .quiz-option.correct label { color:#6ee7b7; }
-    /* P2 CORREGIDO: incorrecto mantiene texto legible en lugar de apagarlo */
     .quiz-option.incorrect { border-color:rgba(239,68,68,0.25); background:rgba(239,68,68,0.04); }
     .quiz-option.incorrect label { color:#94a3b8; }
 
@@ -222,13 +286,9 @@
       display:none; line-height:1.65; font-size:13.5px; border: 1px solid transparent;
     }
     .quiz-feedback.show    { display:block; animation:fadeIn .3s ease; }
-    .quiz-feedback.correct {
-      background: rgba(110,231,183,0.05); border-color: rgba(110,231,183,0.2); color: #cbd5e1;
-    }
+    .quiz-feedback.correct { background:rgba(110,231,183,0.05); border-color:rgba(110,231,183,0.2); color:#cbd5e1; }
     .quiz-feedback.correct strong  { color:#6ee7b7; }
-    .quiz-feedback.incorrect {
-      background: rgba(15,23,42,0.4); border-color: rgba(148,163,184,0.15); color: #cbd5e1;
-    }
+    .quiz-feedback.incorrect { background:rgba(15,23,42,0.4); border-color:rgba(148,163,184,0.15); color:#cbd5e1; }
     .quiz-feedback.incorrect strong { color:#fca5a5; }
 
     .quiz-btn {
@@ -239,14 +299,38 @@
     .quiz-btn.show  { display:inline-block; }
     .quiz-btn:hover { background:#0891b2; transform:translateY(-1px); }
 
-    /* RESULTS — P3 CORREGIDO: results-message con color legible */
+    /* ── MEJORA 5: RESULTADOS con borde y mensaje diferenciado por nivel ── */
     .results-container {
-      background: rgba(15,23,42,0.6); border: 1px solid rgba(168,85,247,0.2);
+      background: rgba(15,23,42,0.6);
       border-radius: 10px; padding: 36px; text-align: center;
+      border: 2px solid transparent; /* se sobreescribe por JS */
+      transition: border-color .4s ease;
     }
-    .results-score   { font-size:56px; font-weight:800; color:#e2e8f0; margin:16px 0; letter-spacing:-2px; }
-    .results-message { font-size:14px; color:#94a3b8; line-height:1.75; margin-bottom:24px; }
-    .results-message strong { color:#e2e8f0; }
+    .results-container.level-perfect { border-color: rgba(251,191,36,0.4); }
+    .results-container.level-high    { border-color: rgba(6,182,212,0.4); }
+    .results-container.level-mid     { border-color: rgba(168,85,247,0.3); }
+    .results-container.level-low     { border-color: rgba(148,163,184,0.2); }
+
+    .results-title { font-size:15px; font-weight:600; margin-bottom:8px; }
+    .results-title.level-perfect { color:#fbbf24; }
+    .results-title.level-high    { color:#06b6d4; }
+    .results-title.level-mid     { color:#d8b4fe; }
+    .results-title.level-low     { color:#94a3b8; }
+
+    .results-score {
+      font-size: 64px; font-weight: 800; margin: 12px 0;
+      letter-spacing: -3px; color: #e2e8f0;
+    }
+    .results-score.level-perfect { color:#fbbf24; }
+    .results-score.level-high    { color:#06b6d4; }
+    .results-score.level-mid     { color:#d8b4fe; }
+    .results-score.level-low     { color:#94a3b8; }
+
+    .results-message {
+      font-size: 14px; color: #94a3b8; line-height: 1.75; margin-bottom: 24px;
+    }
+    .results-message strong { color: #e2e8f0; }
+
     .reset-btn {
       background: transparent; color: #06b6d4; border: 1px solid rgba(6,182,212,0.3);
       padding: 10px 24px; border-radius: 6px; font-size: 13px; font-weight: 600;
@@ -266,11 +350,15 @@
         max-height:140px; padding:12px 16px; display:flex; overflow-x:auto;
       }
       .sidebar h2 { display:none; }
-      .case-list  { display:flex; gap:6px; flex-wrap:nowrap; align-items:center; }
-      .case-item  { margin:0; white-space:nowrap; flex-shrink:0; }
+      .case-list { display:flex; gap:6px; flex-wrap:nowrap; align-items:center; }
+      .case-item { margin:0; white-space:nowrap; flex-shrink:0; }
+      .quiz-item { margin-top:0; border-top:none; padding-top:0; }
       .content-area { padding:20px 16px; overflow:visible; }
       .header h1 { font-size:20px; }
       .case-title-text h2 { font-size:19px; }
+      .skills-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:480px) {
       .skills-grid { grid-template-columns:1fr; }
     }
   </style>
@@ -280,7 +368,8 @@
 
   <div class="header">
     <div class="header-content">
-      <h1>🌊 <span>Navegador de Crisis</span></h1>
+      <!-- MEJORA 1: emoji fuera del span gradient -->
+      <h1>🌊 <span class="title-text">Navegador de Crisis</span></h1>
       <p>Crisis reales en empresas de servicios · Volatilidad · Incertidumbre · Complejidad · Ambigüedad</p>
     </div>
   </div>
@@ -542,14 +631,13 @@
               <p>Pon a prueba tu comprensión de los cuatro tipos de entorno complejo</p>
             </div>
           </div>
-          <!-- P4 CORREGIDO: instrucción de entrada al quiz -->
           <div class="quiz-intro">
             <strong>Instrucciones:</strong> Cuatro preguntas, una por caso. Selecciona la opción que mejor explica la lógica de gestión detrás de las decisiones tomadas. Después de responder cada pregunta verás la explicación completa antes de continuar.
           </div>
           <div id="quiz-content"></div>
           <div id="quiz-results" style="display:none;">
-            <div class="results-container">
-              <h2 style="color:#d8b4fe;margin-bottom:14px;">🎓 Evaluación Completada</h2>
+            <div class="results-container" id="results-container">
+              <div class="results-title" id="results-title"></div>
               <div class="results-score" id="final-score"></div>
               <div class="results-message" id="final-message"></div>
               <button class="reset-btn" onclick="resetQuiz()">Reintentar Evaluación</button>
@@ -572,11 +660,8 @@
       item.classList.add('active');
       document.querySelector('.case-view[data-case="' + caseId + '"]').classList.add('active');
       document.querySelector('.content-area').scrollTop = 0;
-      /* BUG 3 CORREGIDO: resetear estado del quiz al navegar hacia él */
       if (caseId === 'quiz') {
-        currentQuestionIndex = 0;
-        score = 0;
-        answered = false;
+        currentQuestionIndex = 0; score = 0; answered = false;
         document.getElementById('quiz-content').style.display = 'block';
         document.getElementById('quiz-results').style.display = 'none';
         loadQuiz();
@@ -638,16 +723,20 @@
 
   var currentQuestionIndex = 0, score = 0, answered = false;
 
+  /* MEJORA 4: barra de progreso con header separado */
   function loadQuiz() {
     var q   = quizQuestions[currentQuestionIndex];
     var pct = Math.round((currentQuestionIndex / quizQuestions.length) * 100);
     document.getElementById('quiz-content').innerHTML =
       '<div class="quiz-container">' +
         '<div class="quiz-progress-wrap">' +
+          '<div class="quiz-progress-header">' +
+            '<span class="quiz-progress-label">Progreso</span>' +
+            '<span class="quiz-progress-counter">Pregunta ' + (currentQuestionIndex + 1) + ' de ' + quizQuestions.length + ' &nbsp;·&nbsp; ' + pct + '% completado</span>' +
+          '</div>' +
           '<div class="quiz-progress-bar-outer">' +
             '<div class="quiz-progress-bar-inner" style="width:' + pct + '%"></div>' +
           '</div>' +
-          '<div class="quiz-progress-text">Pregunta ' + (currentQuestionIndex + 1) + ' de ' + quizQuestions.length + '</div>' +
         '</div>' +
         '<div class="quiz-question">' + q.question + '</div>' +
         '<div class="quiz-options" id="options-' + q.id + '">' +
@@ -706,23 +795,54 @@
     document.querySelector('.content-area').scrollTop = 0;
   }
 
+  /* MEJORA 5: resultados con nivel visual diferenciado */
   function showResults() {
     document.getElementById('quiz-content').style.display = 'none';
     document.getElementById('quiz-results').style.display = 'block';
-    var pct = (score / quizQuestions.length) * 100;
-    var msg;
-    if      (pct === 100) msg = '🏆 <strong>¡Dominio excepcional!</strong><br><br>Has demostrado comprensión profunda de los cuatro tipos de entorno y sus estrategias de respuesta.';
-    else if (pct >= 75)   msg = '🎯 <strong>Muy buen análisis estratégico</strong><br><br>Comprendes los principios fundamentales. Revisa los casos donde tu respuesta fue incorrecta para afinar la distinción entre los cuatro tipos de entorno.';
-    else if (pct >= 50)   msg = '📚 <strong>Conocimiento básico adquirido</strong><br><br>Captas las ideas principales. Revisa los 4 casos nuevamente, prestando atención a cómo cada tipo de entorno requiere un enfoque específico de respuesta.';
-    else                  msg = '💪 <strong>Es momento de reforzar los conceptos</strong><br><br>Revisa los casos con más detalle, identificando qué tipo de entorno representa cada uno y por qué las decisiones tomadas fueron efectivas en ese contexto particular.';
-    document.getElementById('final-score').textContent = score + '/' + quizQuestions.length;
-    document.getElementById('final-message').innerHTML = msg;
+
+    var pct       = (score / quizQuestions.length) * 100;
+    var container = document.getElementById('results-container');
+    var titleEl   = document.getElementById('results-title');
+    var scoreEl   = document.getElementById('final-score');
+    var msgEl     = document.getElementById('final-message');
+
+    var level, emoji, title, msg;
+
+    if (pct === 100) {
+      level = 'perfect';
+      emoji = '🏆';
+      title = 'Dominio excepcional';
+      msg   = 'Has demostrado comprensión profunda de los cuatro tipos de entorno y sus estrategias de respuesta. Cada antídoto correctamente identificado.';
+    } else if (pct >= 75) {
+      level = 'high';
+      emoji = '🎯';
+      title = 'Muy buen análisis estratégico';
+      msg   = 'Comprendes los principios fundamentales. Revisa los casos donde tu respuesta fue incorrecta para afinar la distinción entre los cuatro tipos de entorno.';
+    } else if (pct >= 50) {
+      level = 'mid';
+      emoji = '📚';
+      title = 'Conocimiento básico adquirido';
+      msg   = 'Captas las ideas principales. Revisa los 4 casos nuevamente, prestando atención a cómo cada tipo de entorno requiere un enfoque específico de respuesta.';
+    } else {
+      level = 'low';
+      emoji = '💪';
+      title = 'Es momento de reforzar los conceptos';
+      msg   = 'Revisa los casos con más detalle, identificando qué tipo de entorno representa cada uno y por qué las decisiones tomadas fueron efectivas en ese contexto particular.';
+    }
+
+    container.className = 'results-container level-' + level;
+    titleEl.className   = 'results-title level-' + level;
+    scoreEl.className   = 'results-score level-' + level;
+
+    titleEl.textContent = emoji + ' ' + title;
+    scoreEl.textContent = score + '/' + quizQuestions.length;
+    msgEl.innerHTML     = msg;
+
+    document.querySelector('.content-area').scrollTop = 0;
   }
 
   function resetQuiz() {
-    currentQuestionIndex = 0;
-    score = 0;
-    answered = false;
+    currentQuestionIndex = 0; score = 0; answered = false;
     document.getElementById('quiz-content').style.display  = 'block';
     document.getElementById('quiz-results').style.display  = 'none';
     loadQuiz();
